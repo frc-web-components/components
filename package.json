@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/frc-web-components/components/issues"
   },
-  "homepage": "https://github.com/frc-web-components/components#readme"
+  "homepage": "https://github.com/frc-web-components/components#readme",
+  "dependencies": {
+    "lit-element": "^2.4.0"
+  }
 }

@@ -1,17 +1,6 @@
-import { Webbit, html, css } from '@webbitjs/webbit';
+import { LitElement, html, css } from 'lit-element';
 
-class BooleanBox extends Webbit {
-
-  static get dashboardConfig() {
-    return {
-      displayName: 'Boolean Box',
-      category: 'General',
-      description: `A box that's shown as one color if true and another color if false.`,
-      documentationLink: 'https://frc-web-components.github.io/components/boolean-box/',
-      slots: [],
-      editorTabs: ['properties', 'sources'],
-    };
-  }
+class BooleanBox extends LitElement {
 
   static get styles() {
     return css`
@@ -37,10 +26,10 @@ class BooleanBox extends Webbit {
 
   static get properties() {
     return {
-      value: { type: Boolean, primary: true },
-      defaultColor: { type: String },
-      trueColor: { type: String },
-      falseColor: { type: String },
+      value: { type: Boolean },
+      defaultColor: { type: String, attribute: 'default-color' },
+      trueColor: { type: String, attribute: 'true-color' },
+      falseColor: { type: String, attribute: 'false-color' },
       label: { type: String },
     };
   }
@@ -67,7 +56,6 @@ class BooleanBox extends Webbit {
   }
 
   firstUpdated() {
-    super.firstUpdated();
     const backgroundNode = this.shadowRoot.querySelector('[part=box]');
     backgroundNode.style.setProperty('--box-color', this.defaultColor);
   }
@@ -81,4 +69,4 @@ class BooleanBox extends Webbit {
   }
 }
 
-webbitRegistry.define('frc-boolean-box', BooleanBox);
+customElements.define('frc-boolean-box', BooleanBox);
