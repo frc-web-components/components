@@ -6,6 +6,9 @@ A box that's shown as one color if true and another color if false.
 Example usage
 =============
 
+API
+===
+
 Slots
 -----
 
