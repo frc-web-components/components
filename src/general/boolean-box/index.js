@@ -26,17 +26,16 @@ class BooleanBox extends LitElement {
 
   static get properties() {
     return {
-      value: { type: Boolean },
-      defaultColor: { type: String, attribute: 'default-color' },
+      value: { type: Boolean, attribute: 'value' },
       trueColor: { type: String, attribute: 'true-color' },
       falseColor: { type: String, attribute: 'false-color' },
-      label: { type: String },
+      label: { type: String, attribute: 'label' },
     };
   }
 
   constructor() {
     super();
-    this.defaultColor = 'black'
+    this.value = false;
     this.trueColor = 'green';
     this.falseColor = 'red';
     this.label = '';
@@ -44,20 +43,9 @@ class BooleanBox extends LitElement {
 
   updated() {
     const backgroundNode = this.shadowRoot.querySelector('[part=box]');
-    let backgroundColor = this.defaultColor;
+    const backgroundColor = this.value ? this.trueColor : this.falseColor;
 
-    if (this.value === true) {
-      backgroundColor = this.trueColor;
-    }
-    else if (this.value === false) {
-      backgroundColor = this.falseColor;
-    }
     backgroundNode.style.setProperty('--box-color', backgroundColor);
-  }
-
-  firstUpdated() {
-    const backgroundNode = this.shadowRoot.querySelector('[part=box]');
-    backgroundNode.style.setProperty('--box-color', this.defaultColor);
   }
 
   render() {
@@ -70,3 +58,13 @@ class BooleanBox extends LitElement {
 }
 
 customElements.define('frc-boolean-box', BooleanBox);
+
+export const config = {
+  name: 'frc-boolean-box',
+  properties: [
+    { name: 'value', type: 'Boolean', attribute: 'value', primary: true },
+    { name: 'trueColor', type: 'String', defaultValue: 'green', attribute: 'true-color' },
+    { name: 'falseColor', type: 'String', defaultValue: 'red', attribute: 'false-color' },
+    { name: 'label', type: 'String', attribute: 'label' },
+  ]
+};
